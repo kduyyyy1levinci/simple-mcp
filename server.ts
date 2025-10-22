@@ -88,13 +88,6 @@ server.registerResource(
 
 const app = express();
 app.use(express.json());
-app.use((req, res, next) => {
-  const clientKey = req.headers['x-mcp-key'];
-  if (clientKey !== process.env.MCP_PRIVATE_KEY) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-  next();
-})
 
 app.post('/mcp', async (req, res) => {
   // Create a new transport for each request to prevent request ID collisions
